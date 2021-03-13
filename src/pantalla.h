@@ -3,15 +3,17 @@
 
 class Pantalla{
 public:
-    String texto;
+    String titulo;
 
     void begin();
     void update();
+    void fontTest();
 
 private:
     unsigned long lastUpdate = 0;
 
-    void header(const char *string, uint16_t color);
+    void header(const char *string);
+    void foot();
     void drawDatumMarker(int x, int y);
 };
 
