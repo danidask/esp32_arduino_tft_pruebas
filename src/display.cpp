@@ -10,6 +10,7 @@ TFT_eSPI tft = TFT_eSPI();
 void Display::begin(){
     tft.begin();
     tft.setRotation(1);
+    tft.fillScreen(TFT_BLACK);
 }
 
 void Display::update(){
@@ -110,4 +111,23 @@ void Display::setFoot(const String& text){
 
 void Display::setFoot(const char * text){
     strcpy(footTxt, text);
+}
+
+void Display::plotLinear(const char *label, int x, int y, int value){
+  int w = 36;
+  value = constrain(value, 0, 100);
+  tft.drawRect(x, y, w, 155, TFT_GREY);
+  tft.fillRect(x + 2, y + 19, w - 3, 155 - 38, TFT_WHITE);
+  tft.setTextColor(TFT_CYAN, TFT_BLACK);
+  tft.drawCentreString(label, x + w / 2, y + 2, 2);
+
+  for (int i = 0; i < 110; i += 10){
+    tft.drawFastHLine(x + 20, y + 27 + i, 6, TFT_BLACK);
+    if (i%50 == 0)
+        tft.drawFastHLine(x + 20, y + 27 + i, 9, TFT_BLACK);
+  }
+
+  tft.fillTriangle(x + 3, y + 127 - value, x + 3 + 16, y + 127 - value, x + 3, y + 127 - 5 - value, TFT_RED);
+  tft.fillTriangle(x + 3, y + 127 - value, x + 3 + 16, y + 127 - value, x + 3, y + 127 + 5 - value, TFT_RED);
+  tft.drawCentreString(String(value).c_str(), x + w / 2, y + 155 - 18, 2);
 }

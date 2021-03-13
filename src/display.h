@@ -1,11 +1,9 @@
 #pragma once
 #include <Arduino.h>
 
+#define TFT_GREY 0x5AEB
 class Display{
 public:
-    char titleTxt[50] = "App";
-    char footTxt[40] = "0.0.0.0";
-
     void begin();
     void update();
     void fontTest();
@@ -13,8 +11,11 @@ public:
     void setTitle(const char * text);
     void setFoot(const String& text);
     void setFoot(const char * text);
+    void plotLinear(const char *label, int x, int y, int value);
 
 private:
+    char titleTxt[50] = "App";
+    char footTxt[40] = "0.0.0.0";
     unsigned long lastUpdate = 0;
 
     void drawHeader(const char *string);
