@@ -1,15 +1,17 @@
 #include <Arduino.h>
-#include "pantalla.h"
+#include "display.h"
 
-Pantalla pantalla;
+Display display;
 
 
 void setup(void) {
   Serial.begin(115200);
-  pantalla.begin();
+  display.begin();
+  display.setTitle("myApp");
+  display.setFoot("192.168.0.0");
 }
 
 void loop() {
-  pantalla.update();
+  display.update();
   delay(4000);
 }

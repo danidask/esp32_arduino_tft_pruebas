@@ -1,33 +1,28 @@
 #pragma once
 #include <Arduino.h>
 
-class Pantalla{
+class Display{
 public:
-    String titulo;
+    char titleTxt[50] = "App";
+    char footTxt[40] = "0.0.0.0";
 
     void begin();
     void update();
     void fontTest();
+    void setTitle(const String& text);
+    void setTitle(const char * text);
+    void setFoot(const String& text);
+    void setFoot(const char * text);
 
 private:
     unsigned long lastUpdate = 0;
 
-    void header(const char *string);
-    void foot();
+    void drawHeader(const char *string);
+    void drawFoot();
     void drawDatumMarker(int x, int y);
 };
 
-// There follows a crude way of flagging that this example sketch needs fonts which
-// have not been enbabled in the User_Setup.h file inside the TFT_HX8357 library.
-//
-// These lines produce errors during compile time if settings in User_Setup are not correct
-//
-// The error will be "does not name a type" but ignore this and read the text between ''
-// it will indicate which font or feature needs to be enabled
-//
-// Either delete all the following lines if you do not want warnings, or change the lines
-// to suit your sketch modifications.
-
+// TODO remove not used fonts here and in platformio.ini
 #ifndef LOAD_GLCD
 //ERROR_Please_enable_LOAD_GLCD_in_User_Setup
 #endif
